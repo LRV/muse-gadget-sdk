@@ -140,6 +140,9 @@ if(CONFIG_MUSE_ENABLED)
     if(CONFIG_MUSE_POWER_TEST)
         list(APPEND srcs "muse_power_test.c")
     endif()
+    if(CONFIG_MUSE_PET)
+        list(APPEND srcs "muse_pet.c")
+    endif()
 elseif(CONFIG_HOMEHUB_VOICE)
     # The Voice PE board uses just the Hatch voice session; the project's main/
     # voice_muse_chat.c stands in for the Muse settings, Wi-Fi and Link hooks.

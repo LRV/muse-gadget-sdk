@@ -49,6 +49,9 @@
 #if CONFIG_MUSE_VIDEO
 #include "muse_video.h"
 #endif
+#if CONFIG_MUSE_PET
+#include "muse_pet.h"
+#endif
 #if CONFIG_MUSE_WATCHER_CAMERA
 #include "boards/watcher_camera.h"
 #endif
@@ -1709,6 +1712,9 @@ static void frame_tick(lv_timer_t *timer)
         muse_menu_close();
         return;   /* video covers everything */
     }
+#endif
+#if CONFIG_MUSE_PET
+    muse_pet_tick();
 #endif
     update_chrome(now);
     if (muse_menu_tick(now)) {

@@ -36,6 +36,9 @@
 #include "sim_board.h"
 #include "sim_platform.h"
 #include "sim_services.h"
+#if CONFIG_MUSE_PET
+#include "muse_pet.h"
+#endif
 
 #define FRAME_STEP_MS 5
 
@@ -509,6 +512,9 @@ int main(int argc, char **argv)
     lv_init();
     muse_state_init();
     muse_state_set_power(&s_power);
+#if CONFIG_MUSE_PET
+    muse_pet_init();
+#endif
     muse_board = sim_board_get();
     if (muse_board->init && muse_board->init() != ESP_OK) {
         fprintf(stderr, "simulator board initialization failed\n");

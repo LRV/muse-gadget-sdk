@@ -270,6 +270,16 @@ menu "Muse"
             to pay for the CPU's light-sleep retention memory, which it
             takes at boot and keeps.
 
+    config MUSE_PET
+        bool "Virtual pet stats for the Muse avatar"
+        depends on MUSE_ENABLED
+        default n
+        help
+            Adds hunger, energy, and mood stats that decay slowly over time.
+            Stats persist to NVS (namespace "pet") and survive reboots.
+            Call muse_pet_init() once after NVS is ready, muse_pet_tick()
+            each UI frame, and muse_pet_feed()/muse_pet_pet() on user actions.
+
     config MUSE_HATCH
         bool "Muse's own voice session"
         depends on MUSE_ENABLED
