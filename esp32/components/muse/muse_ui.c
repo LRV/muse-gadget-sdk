@@ -50,7 +50,7 @@
 #include "muse_video.h"
 #endif
 #if CONFIG_MUSE_PET
-#include "muse_pet.h"
+#include "muse_pet_ui.h"
 #endif
 #if CONFIG_MUSE_WATCHER_CAMERA
 #include "boards/watcher_camera.h"
@@ -1051,6 +1051,9 @@ static void build_screen(void)
     }
 
     build_answer(face, ring_in);
+#if CONFIG_MUSE_PET
+    muse_pet_ui_build(face, s_big_y);
+#endif
 }
 
 
@@ -1715,6 +1718,7 @@ static void frame_tick(lv_timer_t *timer)
 #endif
 #if CONFIG_MUSE_PET
     muse_pet_tick();
+    muse_pet_ui_update();
 #endif
     update_chrome(now);
     if (muse_menu_tick(now)) {
