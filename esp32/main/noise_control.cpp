@@ -51,6 +51,9 @@ extern "C" {
 #include "muse_state.h"
 }
 #endif
+#if CONFIG_MUSE_PET
+#include "muse_pet_cmds.h"
+#endif
 }
 
 #include <xplat/noise/core/ClientSession.h>
@@ -1553,6 +1556,17 @@ static char *build_register_json(void) {
 
 #if CONFIG_HOMEHUB_BLE_COMMANDS
     ble_commands_register(commands);
+#endif
+#if CONFIG_MUSE_PET
+    add_command(commands, "pet.status",
+                "Return the pet's hunger, energy, and mood (0-100 each)",
+                nullptr, nullptr);
+    add_command(commands, "pet.feed",
+                "Feed the pet; returns updated hunger, energy, and mood",
+                nullptr, nullptr);
+    add_command(commands, "pet.pet",
+                "Comfort the pet; returns updated hunger, energy, and mood",
+                nullptr, nullptr);
 #endif
 
     cJSON_AddItemToObject(params, "commands_v2", commands);

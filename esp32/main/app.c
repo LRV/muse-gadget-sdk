@@ -33,6 +33,9 @@
 #if CONFIG_MUSE_WATCHER_CAMERA
 #include "freertos/idf_additions.h"
 #endif
+#if CONFIG_MUSE_PET
+#include "muse_pet_cmds.h"
+#endif
 #include "esp_timer.h"
 #include "esp_system.h"
 #include "esp_attr.h"
@@ -1972,6 +1975,11 @@ static cJSON *on_ws_command(
     }
 #endif
 
+#if CONFIG_MUSE_PET
+    if (muse_pet_cmd_handles(command)) {
+        return muse_pet_cmd_handle(command);
+    }
+#endif
     char msg[128];
     snprintf(msg, sizeof(msg), "unsupported command: %s", command);
     return command_error("unsupported", msg);
