@@ -150,11 +150,13 @@ muse_pet_stats_t muse_pet_stats(void)
 void muse_pet_feed(void)
 {
     s_hunger = clamped(s_hunger + FEED_BOOST);
+    muse_state_make_happy();
     commit_stats();
 }
 
 void muse_pet_pet(void)
 {
     s_mood = clamped(s_mood + PET_BOOST);
+    muse_state_make_happy();
     commit_stats();
 }
